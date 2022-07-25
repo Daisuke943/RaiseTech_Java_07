@@ -23,7 +23,7 @@ public class Sample3 {
 
         try {
             System.out.println(names.get(3));
-        } catch (ArrayIndexOutOfBoundsException  e) {
+        } catch (IndexOutOfBoundsException e) {
             System.out.println("配列の範囲を超えています。");
             throw e;
         }
