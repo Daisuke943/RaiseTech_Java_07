@@ -30,4 +30,13 @@ public class SpringBootSampleApplication {
 		return String.format("%sの現在時刻は%sです。", name, time.format(fmt));
 	}
 
+	// 引数にデフォルト値を設定しなかった場合、どうなるか確認
+	@GetMapping("/japantest")
+	public String japantest(@RequestParam(value = "name") String name) {
+		DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+		LocalDateTime time = LocalDateTime.now();
+
+		return String.format("%sの現在時刻は%sです。", name, time.format(fmt));
+	}
+
 }
