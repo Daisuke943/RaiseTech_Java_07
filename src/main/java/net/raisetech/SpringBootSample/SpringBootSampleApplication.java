@@ -32,7 +32,12 @@ public class SpringBootSampleApplication {
 
 	// 引数にデフォルト値を設定しなかった場合、どうなるか確認
 	@GetMapping("/japantest")
-	public String japantest(@RequestParam(value = "name") String name) {
+	public String japantest(@RequestParam(value = "name", required = false) String name) {
+
+		if(name == null) {
+			name = "日本";
+		}
+
 		DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
 		LocalDateTime time = LocalDateTime.now();
 
