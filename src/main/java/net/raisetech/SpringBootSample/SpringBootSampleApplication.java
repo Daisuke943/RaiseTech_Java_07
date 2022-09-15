@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import java.util.Objects;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -34,8 +35,8 @@ public class SpringBootSampleApplication {
 	@GetMapping("/japantest")
 	public String japantest(@RequestParam(value = "name", required = false) String name) {
 
-		if(name == null) {
-			name = "日本";
+		if(Objects.equals(name,null)) {
+			return "リクエストパラメータに値を設定してください";
 		}
 
 		DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
