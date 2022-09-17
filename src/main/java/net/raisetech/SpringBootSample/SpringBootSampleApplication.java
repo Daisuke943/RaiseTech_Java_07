@@ -6,8 +6,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.apache.commons.*;
-import java.util.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -37,9 +35,13 @@ public class SpringBootSampleApplication {
 	@GetMapping("/japantest")
 	public String japantest(@RequestParam(value = "name", required = false) String name) {
 
-		if(StringUtils.isEmpty(name)) {
+		if(name.equals(null)) {
 			return "リクエストパラメータに値を設定してください。";
 		}
+
+//		if(StringUtils.isEmpty(name)) {
+//			return "リクエストパラメータに値を設定してください。";
+//		}
 
 //		if(Objects.equals(name,null)) {
 //			return "リクエストパラメータに値を設定してください";
