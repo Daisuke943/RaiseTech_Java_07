@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 @SpringBootApplication
 @RestController
@@ -35,11 +36,16 @@ public class SpringBootSampleApplication {
 	@GetMapping("/japantest")
 	public String japantest(@RequestParam(value = "name", required = false) String name) {
 
-		if(name.equals(null)) {
+		Optional<String> namenull = Optional.ofNullable(name);
+		if(namenull.isEmpty()) {
 			return "リクエストパラメータに値を設定してください。";
 		}
 
 //		if(StringUtils.isEmpty(name)) {
+//			return "リクエストパラメータに値を設定してください。";
+//		}
+
+//		if(name.equals(null)) {
 //			return "リクエストパラメータに値を設定してください。";
 //		}
 
