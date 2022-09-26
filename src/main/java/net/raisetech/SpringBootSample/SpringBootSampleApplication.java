@@ -12,50 +12,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 @SpringBootApplication
-@RestController
 public class SpringBootSampleApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootSampleApplication.class, args);
-	}
-
-	@GetMapping("/hello")
-	public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
-		return String.format("Hello %s!", name);
-	}
-
-	@GetMapping("/japan")
-	public String japan(@RequestParam(value = "name", defaultValue = "日本") String name) {
-		DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
-		LocalDateTime time = LocalDateTime.now();
-
-		return String.format("%sの現在時刻は%sです。", name, time.format(fmt));
-	}
-
-	// 引数にデフォルト値を設定しなかった場合、どうなるか確認
-	@GetMapping("/japantest")
-	public String japantest(@RequestParam(value = "name", required = false) String name) {
-
-		Optional<String> namenull = Optional.ofNullable(name);
-		if(namenull.isEmpty()) {
-			return "リクエストパラメータに値を設定してください。";
-		}
-
-//		if(StringUtils.isEmpty(name)) {
-//			return "リクエストパラメータに値を設定してください。";
-//		}
-
-//		if(name.equals(null)) {
-//			return "リクエストパラメータに値を設定してください。";
-//		}
-
-//		if(Objects.equals(name,null)) {
-//			return "リクエストパラメータに値を設定してください";
-//		}
-
-		DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
-		LocalDateTime time = LocalDateTime.now();
-
-		return String.format("%sの現在時刻は%sです。", name, time.format(fmt));
 	}
 }
