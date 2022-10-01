@@ -3,6 +3,7 @@ package net.raisetech.SpringBootSample.controller;
 import net.raisetech.SpringBootSample.form.CreateForm;
 import net.raisetech.SpringBootSample.form.UpdateForm;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -13,12 +14,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.Map;
 import java.util.Optional;
 
 @RestController
 public class NameController {
+    private final String localUrl = "http://localhost:8080";
+
     @GetMapping("/names")
     public ResponseEntity<Map<String, String>> getNames(@RequestParam(value = "name", defaultValue = "name") String name) {
         if("name".equals(name)) {
@@ -29,17 +33,16 @@ public class NameController {
     }
 
     @PostMapping("/names")
-    public ResponseEntity<String> create(@RequestBody CreateForm form) {
-        String urlStr = "http://localhost:8080";
-        URI url = UriComponentsBuilder.fromUriString(urlStr)
+    public ResponseEntity<String> create(@RequestBody @Validated CreateForm form) {
+        URI url = UriComponentsBuilder.fromUriString(localUrl)
                 .path("/names/id")
                 .build()
                 .toUri();
-        return ResponseEntity.created(url).body("name successfully created URL:" + url);
+        return ResponseEntity.created(url).body("name successfully created");
     }
 
     @PatchMapping("/names/{id}")
-    public ResponseEntity<Map<String, String>> update(@PathVariable("id") int id, @RequestBody UpdateForm form) {
+    public ResponseEntity<Map<String, String>> update(@PathVariable("id") int id, @RequestBody @Validated UpdateForm form) {
         return ResponseEntity.ok(Map.of("message", "name successfully updated. name:" + form.getName()));
     }
 
