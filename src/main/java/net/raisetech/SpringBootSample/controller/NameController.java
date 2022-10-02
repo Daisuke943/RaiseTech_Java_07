@@ -2,6 +2,7 @@ package net.raisetech.SpringBootSample.controller;
 
 import net.raisetech.SpringBootSample.form.CreateForm;
 import net.raisetech.SpringBootSample.form.UpdateForm;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,13 +16,19 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Properties;
 
 @RestController
 public class NameController {
-    private final String localUrl = "http://localhost:8080";
+    @Value("${localUrl}")
+    private String localUrl;
 
     @GetMapping("/names")
     public ResponseEntity<Map<String, String>> getNames(@RequestParam(value = "name", defaultValue = "name") String name) {
