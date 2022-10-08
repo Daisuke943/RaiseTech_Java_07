@@ -1,2 +1,9 @@
-package net.raisetech.SpringBootSample.entity;public class Name {
+package net.raisetech.SpringBootSample.entity;
+
+import lombok.Data;
+
+@Data
+public class Name {
+    private int id;
+    private String name;
 }
