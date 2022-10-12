@@ -1,8 +1,8 @@
 package net.raisetech.SpringBootSample.entity;
 
-import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 public class Movie {
     private int id;
     private String name;

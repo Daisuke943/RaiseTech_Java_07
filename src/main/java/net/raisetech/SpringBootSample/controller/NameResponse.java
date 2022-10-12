@@ -1,9 +1,9 @@
 package net.raisetech.SpringBootSample.controller;
 
-import lombok.Data;
+import lombok.Getter;
 import net.raisetech.SpringBootSample.entity.Name;
 
-@Data
+@Getter
 public class NameResponse {
     private int id;
     private String name;

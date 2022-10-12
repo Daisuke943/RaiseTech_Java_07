@@ -1,10 +1,9 @@
 package net.raisetech.SpringBootSample.controller;
 
-import lombok.Data;
+import lombok.Getter;
 import net.raisetech.SpringBootSample.entity.Movie;
-import net.raisetech.SpringBootSample.entity.Name;
 
-@Data
+@Getter
 public class MovieResponse {
     private int id;
     private String name;
