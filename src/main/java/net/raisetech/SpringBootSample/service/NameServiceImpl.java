@@ -5,6 +5,7 @@ import net.raisetech.SpringBootSample.entity.Name;
 import net.raisetech.SpringBootSample.repository.NameMapper;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.InaccessibleObjectException;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,7 +21,21 @@ public class NameServiceImpl implements NameService {
         return nameMapper.findAll();
     }
     @Override
-    public List<Movie> findByYear(int year) {
-        return nameMapper.findByYear(year);
+    public Name findById(int id) throws NullPointerException {
+        Optional<Name> name = nameMapper.findById(id);
+        if (name.isPresent()) {
+            return name.get();
+        } else {
+            throw new NullPointerException();
+        }
+    }
+    @Override
+    public List<Movie> findByYear(int year) throws NullPointerException {
+        Optional<List<Movie>> movieList = this.nameMapper.findByYear(year);
+        if (movieList.isPresent()) {
+            return movieList.get();
+        } else {
+            throw new NullPointerException();
+        }
     }
 }

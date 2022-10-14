@@ -12,6 +12,8 @@ import java.util.Optional;
 public interface NameMapper {
     @Select("SELECT * FROM names")
     List<Name> findAll();
+    @Select("SELECT * FROM names where id = #{id}")
+    Optional<Name> findById(int id);
     @Select("SELECT * FROM movies WHERE published_year = #{year}")
-    List<Movie> findByYear(int year);
+    Optional<List<Movie>> findByYear(int year);
 }
