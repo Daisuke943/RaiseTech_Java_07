@@ -31,9 +31,9 @@ public class NameServiceImpl implements NameService {
     }
     @Override
     public List<Movie> findByYear(int year) throws NullPointerException {
-        Optional<List<Movie>> movieList = this.nameMapper.findByYear(year);
-        if (movieList.isPresent()) {
-            return movieList.get();
+        List<Movie> movieList = this.nameMapper.findByYear(year);
+        if (!movieList.isEmpty()) {
+            return movieList;
         } else {
             throw new NullPointerException();
         }

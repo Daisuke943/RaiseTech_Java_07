@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.lang.reflect.InaccessibleObjectException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -25,25 +26,25 @@ public class NameController {
     }
     @GetMapping("/names/{id}")
     public NameResponse getName(@PathVariable("id") int id) {
-        NameResponse nameResponse = null;
+        NameResponse nameResponse = new NameResponse();
         try {
             nameResponse = new NameResponse(nameService.findById(id));
         } catch (NullPointerException e) {
-            nameResponse = new NameResponse();
-            nameResponse.setErrorMessage("検索結果がありません");
+            nameResponse.setErrorMessage("ユーザーが見つかりませんでした。");
         }
         return nameResponse;
     }
 
     @GetMapping("/movies")
     public List<MovieResponse> getMovies(@RequestParam(name = "published_year") int year) {
-        List<MovieResponse> movieResponseList = null;
+        List<MovieResponse> movieResponseList = new ArrayList<>();
         try {
             movieResponseList = nameService.findByYear(year).stream().map(MovieResponse::new).toList();
         } catch (NullPointerException e) {
             MovieResponse movieResponse = new MovieResponse();
-            movieResponse.setErrorMessage("検索結果がありません");
+            movieResponse.setErrorMessage("映画が見つかりませんでした。");
             movieResponseList.add(movieResponse);
+            return movieResponseList;
         }
         return movieResponseList;
     }
