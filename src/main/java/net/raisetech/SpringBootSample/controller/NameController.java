@@ -37,15 +37,12 @@ public class NameController {
 
     @GetMapping("/movies")
     public List<MovieResponse> getMovies(@RequestParam(name = "published_year") int year) {
-        List<MovieResponse> movieResponseList = new ArrayList<>();
-        try {
-            movieResponseList = nameService.findByYear(year).stream().map(MovieResponse::new).toList();
-        } catch (NullPointerException e) {
-            MovieResponse movieResponse = new MovieResponse();
-            movieResponse.setErrorMessage("映画が見つかりませんでした。");
-            movieResponseList.add(movieResponse);
-            return movieResponseList;
+        List<MovieResponse> movieResponseList = nameService.findByYear(year).stream().map(MovieResponse::new).toList();
+
+        if (movieResponseList.isEmpty()) {
+
         }
+
         return movieResponseList;
     }
 }

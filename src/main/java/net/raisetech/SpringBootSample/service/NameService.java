@@ -10,5 +10,5 @@ import java.util.Optional;
 public interface NameService {
     List<Name> findAll();
     Name findById(int id) throws NullPointerException;
-    List<Movie> findByYear(int year) throws NullPointerException;
+    List<Movie> findByYear(int year);
 }
