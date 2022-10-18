@@ -3,6 +3,8 @@ package net.raisetech.SpringBootSample.controller;
 import net.raisetech.SpringBootSample.entity.Movie;
 import net.raisetech.SpringBootSample.entity.Name;
 import net.raisetech.SpringBootSample.service.NameService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -10,7 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.lang.reflect.InaccessibleObjectException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -36,13 +40,12 @@ public class NameController {
     }
 
     @GetMapping("/movies")
-    public List<MovieResponse> getMovies(@RequestParam(name = "published_year") int year) {
+    public ResponseEntity getMovies(@RequestParam(name = "published_year") int year) {
         List<MovieResponse> movieResponseList = nameService.findByYear(year).stream().map(MovieResponse::new).toList();
-
+        // Listが空の場合はエラーメッセージをレスポンスとして返す
         if (movieResponseList.isEmpty()) {
-
+            return ResponseEntity.ok(Map.of("message", "映画が見つかりませんでした"));
         }
-
-        return movieResponseList;
+        return ResponseEntity.status(HttpStatus.CREATED).body(movieResponseList);
     }
 }

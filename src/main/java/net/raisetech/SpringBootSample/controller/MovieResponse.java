@@ -10,8 +10,6 @@ public class MovieResponse {
     private String name;
     private String director;
     private int published_year;
-    @Setter
-    private String errorMessage;
 
     public MovieResponse() {
     }
