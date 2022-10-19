@@ -44,8 +44,8 @@ public class NameController {
         List<MovieResponse> movieResponseList = nameService.findByYear(year).stream().map(MovieResponse::new).toList();
         // Listが空の場合はエラーメッセージをレスポンスとして返す
         if (movieResponseList.isEmpty()) {
-            return ResponseEntity.ok(Map.of("message", "映画が見つかりませんでした"));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", "映画が見つかりませんでした"));
         }
-        return ResponseEntity.status(HttpStatus.CREATED).body(movieResponseList);
+        return ResponseEntity.status(HttpStatus.OK).body(movieResponseList);
     }
 }
