@@ -8,8 +8,6 @@ import net.raisetech.SpringBootSample.entity.Name;
 public class NameResponse {
     private int id;
     private String name;
-    @Setter
-    private String errorMessage;
     public NameResponse() {
     }
     // NameからNameResponseに変換できるコンストラクタを⽤意

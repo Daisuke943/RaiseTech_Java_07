@@ -29,14 +29,14 @@ public class NameController {
         return nameService.findAll().stream().map(NameResponse::new).toList();
     }
     @GetMapping("/names/{id}")
-    public NameResponse getName(@PathVariable("id") int id) {
+    public ResponseEntity getName(@PathVariable("id") int id) {
         NameResponse nameResponse = new NameResponse();
         try {
             nameResponse = new NameResponse(nameService.findById(id));
         } catch (NullPointerException e) {
-            nameResponse.setErrorMessage("ユーザーが見つかりませんでした。");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", "ユーザーが見つかりませんでした"));
         }
-        return nameResponse;
+        return ResponseEntity.status(HttpStatus.OK).body(nameResponse);
     }
 
     @GetMapping("/movies")
