@@ -38,7 +38,6 @@ public class NameController {
         }
         return ResponseEntity.status(HttpStatus.OK).body(nameResponse);
     }
-
     @GetMapping("/movies")
     public ResponseEntity getMovies(@RequestParam(name = "published_year") int year) {
         List<MovieResponse> movieResponseList = nameService.findByYear(year).stream().map(MovieResponse::new).toList();
