@@ -61,6 +61,10 @@ Create処理で登録した中村を小林に更新
 中村が小林に更新されていることを確認<br>
 <img width="259" alt="image" src="https://user-images.githubusercontent.com/47516167/198837079-8bd43649-c407-45f8-954f-66206cff98b5.png">
 
+テーブルに存在しないidを指定した場合はエラーメッセージを返すことを確認
+<img width="1186" alt="image" src="https://user-images.githubusercontent.com/47516167/198837781-f3ac5b0c-bb4e-49d7-b43c-4c86cb886832.png">
+
+
 ## Delete処理
 ~~~
 DELETEメソッド : http://localhost:8080/names/6
@@ -70,3 +74,6 @@ Update処理で更新した小林を削除
 
 小林が削除されていることを確認<br>
 <img width="260" alt="image" src="https://user-images.githubusercontent.com/47516167/198837320-ae93b107-b0e6-4bcd-9cc5-06ca2e6e2c08.png">
+
+テーブルに存在しないidを指定した場合はエラーメッセージを返すことを確認
+<img width="1183" alt="image" src="https://user-images.githubusercontent.com/47516167/198837846-f7dc522e-5b6d-427b-b28d-0042847a4259.png">
